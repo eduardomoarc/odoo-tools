@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_inherit" model="ir.ui.view">
+        <field name="name">res.config.settings.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <div id="languages" position="before">
+                <h2>Window</h2>
+                <div class="row mt16 o_settings_container" name="window">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Title</span>
+                            <div class="text-muted">
+                                The custom web window title
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16 row">
+                                    <label
+                                            for="web_title"
+                                            string="Title"
+                                            class="col-3 col-lg-3 o_light_label"
+                                    />
+                                    <field name="web_title" class="oe_inline"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>PWA (Progressive Web App)</h2>
+                <div class="row mt16 o_settings_container" name="pwa_settings">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">App Name</span>
+                            <div class="text-muted">
+                                Name displayed when installing the app
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16 row">
+                                    <label
+                                            for="web_app_name"
+                                            string="App Name"
+                                            class="col-3 col-lg-3 o_light_label"
+                                    />
+                                    <field name="web_app_name" class="oe_inline"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">PWA Icon</span>
+                            <div class="text-muted">
+                                Icon for the installable app (recommended: 512x512 PNG)
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="pwa_icon" widget="image" class="oe_avatar"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Theme Color</span>
+                            <div class="text-muted">
+                                Browser toolbar color (hex format, e.g., #714B67)
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16 row">
+                                    <label
+                                            for="pwa_theme_color"
+                                            string="Color"
+                                            class="col-3 col-lg-3 o_light_label"
+                                    />
+                                    <field name="pwa_theme_color" class="oe_inline"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Background Color</span>
+                            <div class="text-muted">
+                                Splash screen background color (hex format)
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16 row">
+                                    <label
+                                            for="pwa_background_color"
+                                            string="Color"
+                                            class="col-3 col-lg-3 o_light_label"
+                                    />
+                                    <field name="pwa_background_color" class="oe_inline"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+    <record id="res_config_settings_view_form_inherit_branding" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.branding</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='about_setting_container']" position="replace">
+            </xpath>
+        </field>
+    </record>
+</odoo>

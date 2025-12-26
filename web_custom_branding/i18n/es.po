@@ -1,0 +1,142 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * web_custom_branding
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: web_custom_branding
+#: model:ir.model.fields,field_description:web_custom_branding.field_res_config_settings__web_title
+msgid "Window Title or tab title"
+msgstr "Título de ventana o pestaña"
+
+#. module: web_custom_branding
+#: model_terms:ir.ui.view,arch_db:web_custom_branding.res_config_settings_view_form_inherit
+msgid "Window"
+msgstr "Ventana"
+
+#. module: web_custom_branding
+#: model_terms:ir.ui.view,arch_db:web_custom_branding.res_config_settings_view_form_inherit
+msgid "Title"
+msgstr "Título"
+
+#. module: web_custom_branding
+#: model_terms:ir.ui.view,arch_db:web_custom_branding.res_config_settings_view_form_inherit
+msgid "The custom web window title"
+msgstr "El título personalizado de la ventana web"
+
+#. module: web_custom_branding
+#: model_terms:ir.ui.view,arch_db:web_custom_branding.webclient_offline
+msgid "Offline"
+msgstr "Sin conexión"
+
+#. module: web_custom_branding
+#: model_terms:ir.ui.view,arch_db:web_custom_branding.webclient_offline
+msgid "Please check your internet connection and try again. The application will load automatically when you are connected."
+msgstr "Por favor verifique su conexión a internet y vuelva a intentarlo. La aplicación se cargará automáticamente cuando esté conectado."
+
+#. module: web_custom_branding
+#: model_terms:ir.ui.view,arch_db:web_custom_branding.webclient_offline
+msgid "Retry"
+msgstr "Reintentar"
+
+#. module: web_custom_branding
+#: model_terms:ir.ui.view,arch_db:web_custom_branding.login_layout_inherit
+msgid "Manage Databases"
+msgstr "Administrar Bases de Datos"
+
+#. module: web_custom_branding
+#: model:ir.model.fields,field_description:web_custom_branding.field_res_config_settings__web_app_name
+msgid "PWA App Name"
+msgstr "Nombre de la App PWA"
+
+#. module: web_custom_branding
+#: model:ir.model.fields,help:web_custom_branding.field_res_config_settings__web_app_name
+msgid "The name displayed when installing the app (PWA)"
+msgstr "El nombre que se muestra al instalar la aplicación (PWA)"
+
+#. module: web_custom_branding
+#: model:ir.model.fields,field_description:web_custom_branding.field_res_config_settings__pwa_icon
+msgid "PWA Icon"
+msgstr "Ícono PWA"
+
+#. module: web_custom_branding
+#: model:ir.model.fields,help:web_custom_branding.field_res_config_settings__pwa_icon
+msgid "Icon for the Progressive Web App (recommended: 512x512 PNG)"
+msgstr "Ícono para la aplicación web progresiva (recomendado: 512x512 PNG)"
+
+#. module: web_custom_branding
+#: model:ir.model.fields,field_description:web_custom_branding.field_res_config_settings__pwa_theme_color
+msgid "PWA Theme Color"
+msgstr "Color del Tema PWA"
+
+#. module: web_custom_branding
+#: model:ir.model.fields,help:web_custom_branding.field_res_config_settings__pwa_theme_color
+msgid "Theme color for the PWA (hex format, e.g., #714B67)"
+msgstr "Color del tema para la PWA (formato hex, ej: #714B67)"
+
+#. module: web_custom_branding
+#: model:ir.model.fields,field_description:web_custom_branding.field_res_config_settings__pwa_background_color
+msgid "PWA Background Color"
+msgstr "Color de Fondo PWA"
+
+#. module: web_custom_branding
+#: model:ir.model.fields,help:web_custom_branding.field_res_config_settings__pwa_background_color
+msgid "Background color for the PWA splash screen (hex format)"
+msgstr "Color de fondo para la pantalla de inicio de la PWA (formato hex)"
+
+#. module: web_custom_branding
+#: model_terms:ir.ui.view,arch_db:web_custom_branding.res_config_settings_view_form_inherit
+msgid "PWA (Progressive Web App)"
+msgstr "PWA (Aplicación Web Progresiva)"
+
+#. module: web_custom_branding
+#: model_terms:ir.ui.view,arch_db:web_custom_branding.res_config_settings_view_form_inherit
+msgid "App Name"
+msgstr "Nombre de la App"
+
+#. module: web_custom_branding
+#: model_terms:ir.ui.view,arch_db:web_custom_branding.res_config_settings_view_form_inherit
+msgid "Name displayed when installing the app"
+msgstr "Nombre que se muestra al instalar la aplicación"
+
+#. module: web_custom_branding
+#: model_terms:ir.ui.view,arch_db:web_custom_branding.res_config_settings_view_form_inherit
+msgid "Icon for the installable app (recommended: 512x512 PNG)"
+msgstr "Ícono para la aplicación instalable (recomendado: 512x512 PNG)"
+
+#. module: web_custom_branding
+#: model_terms:ir.ui.view,arch_db:web_custom_branding.res_config_settings_view_form_inherit
+msgid "Theme Color"
+msgstr "Color del Tema"
+
+#. module: web_custom_branding
+#: model_terms:ir.ui.view,arch_db:web_custom_branding.res_config_settings_view_form_inherit
+msgid "Browser toolbar color (hex format, e.g., #714B67)"
+msgstr "Color de la barra del navegador (formato hex, ej: #714B67)"
+
+#. module: web_custom_branding
+#: model_terms:ir.ui.view,arch_db:web_custom_branding.res_config_settings_view_form_inherit
+msgid "Background Color"
+msgstr "Color de Fondo"
+
+#. module: web_custom_branding
+#: model_terms:ir.ui.view,arch_db:web_custom_branding.res_config_settings_view_form_inherit
+msgid "Splash screen background color (hex format)"
+msgstr "Color de fondo de la pantalla de inicio (formato hex)"
+
+#. module: web_custom_branding
+#: model_terms:ir.ui.view,arch_db:web_custom_branding.res_config_settings_view_form_inherit
+msgid "Color"
+msgstr "Color"

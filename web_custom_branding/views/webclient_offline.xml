@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="webclient_offline" inherit_id="web.webclient_offline">
+        <!-- Remove the entire card div and replace with our custom content -->
+        <xpath expr="//div[@class='card']" position="replace">
+            <div class="card">
+                <h1>Offline</h1>
+                <p>Please check your internet connection and try again. The application will load automatically when you are connected.</p>
+                <button onclick="location.reload()">Retry</button>
+            </div>
+        </xpath>
+    </template>
+</odoo>
