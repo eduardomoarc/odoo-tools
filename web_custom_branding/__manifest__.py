@@ -35,7 +35,7 @@
 
     'author': "Eduardo Morón",
 
-    'category': 'Website',
+    'category': 'Extra Tools',
     'version': '17.0.1.0.0',
     'license': 'LGPL-3',
 

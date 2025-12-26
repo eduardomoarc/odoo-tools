@@ -1,247 +1,158 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1, h2, h3 {
-            color: #714B67;
-        }
-        h1 {
-            border-bottom: 2px solid #714B67;
-            padding-bottom: 10px;
-        }
-        .feature-section {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .feature-section h3 {
-            margin-top: 0;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        li {
-            margin: 8px 0;
-        }
-        .highlight {
-            background: #e8f4f8;
-            padding: 15px;
-            border-left: 4px solid #714B67;
-            margin: 15px 0;
-        }
-        .settings-path {
-            font-family: monospace;
-            background: #eee;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-        .new-badge {
-            background: #28a745;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            margin-left: 8px;
-        }
-        .support-section {
-            background: linear-gradient(135deg, #714B67 0%, #8e6384 100%);
-            border-radius: 8px;
-            padding: 30px;
-            margin: 30px 0;
-            text-align: center;
-            color: white;
-        }
-        .support-section h2 {
-            color: white;
-            margin-top: 0;
-        }
-        .support-section p {
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-        .btn-support {
-            display: inline-block;
-            background: white;
-            color: #714B67;
-            padding: 12px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .btn-support:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        .screenshots-section {
-            margin: 40px 0;
-        }
-        .screenshots-section h2 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .screenshots-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        .screenshot-item {
-            background: #f8f9fa;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .screenshot-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-        .screenshot-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .screenshot-item .caption {
-            padding: 12px 15px;
-            font-size: 14px;
-            color: #555;
-            text-align: center;
-            background: white;
-        }
-    </style>
-</head>
-<body>
-    <h1>Web Custom Branding</h1>
-
-    <p>
-        This module allows you to fully customize Odoo branding elements for a complete
-        white-label experience. Remove all Odoo references and replace them with your own brand.
-    </p>
-
-    <div class="highlight">
-        <strong>Perfect for:</strong> Companies that want to offer Odoo to their clients
-        under their own brand, or businesses that prefer a cleaner interface without
-        external references.
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12">
+            <h2 class="oe_slogan" style="color:#714B67;">Web Custom Branding</h2>
+            <h3 class="oe_slogan">Complete White-Label Solution for Odoo 17</h3>
+            <p class="oe_mt32 text-center">
+                Fully customize Odoo branding elements for a complete white-label experience.
+                Remove all Odoo references and replace them with your own brand.
+            </p>
+        </div>
     </div>
+</section>
 
-    <div class="feature-section">
-        <h3>User Menu Customization</h3>
-        <p>Clean up the user dropdown menu by hiding unnecessary Odoo-related links:</p>
-        <ul>
-            <li>Hides "My Odoo.com account" option</li>
-            <li>Hides "Documentation" link</li>
-            <li>Hides "Support" link</li>
-        </ul>
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12">
+            <h3 class="oe_slogan">Perfect for</h3>
+            <p class="text-center">
+                Companies that want to offer Odoo to their clients under their own brand,
+                or businesses that prefer a cleaner interface without external references.
+            </p>
+        </div>
     </div>
+</section>
 
-    <div class="feature-section">
-        <h3>Login Page</h3>
-        <ul>
-            <li>Removes "Powered by Odoo" footer text</li>
-            <li>Clean, professional login experience</li>
-        </ul>
-    </div>
-
-    <div class="feature-section">
-        <h3>Window Title</h3>
-        <p>Customize the browser tab/window title:</p>
-        <ul>
-            <li>Set a custom window title (replaces "Odoo")</li>
-            <li>Configure in <span class="settings-path">Settings &gt; General &gt; Window</span></li>
-        </ul>
-    </div>
-
-    <div class="feature-section">
-        <h3>PWA (Progressive Web App) <span class="new-badge">NEW</span></h3>
-        <p>Full control over the installable web app experience:</p>
-        <ul>
-            <li><strong>App Name:</strong> Custom name displayed when installing the app from the browser</li>
-            <li><strong>PWA Icon:</strong> Replace the Odoo icon with your own logo (recommended: 512x512 PNG)</li>
-            <li><strong>Theme Color:</strong> Customize the browser toolbar color</li>
-            <li><strong>Background Color:</strong> Set the splash screen background color</li>
-        </ul>
-        <p>Configure in <span class="settings-path">Settings &gt; General &gt; PWA (Progressive Web App)</span></p>
-    </div>
-
-    <div class="feature-section">
-        <h3>Settings Panel</h3>
-        <ul>
-            <li>Hides the "About" section from General Settings</li>
-            <li>Removes Odoo version and company information</li>
-        </ul>
-    </div>
-
-    <div class="feature-section">
-        <h3>Offline Page</h3>
-        <ul>
-            <li>Hides Odoo icon</li>
-        </ul>
-    </div>
-
-    <h2>Configuration</h2>
-    <p>
-        After installation, go to <span class="settings-path">Settings &gt; General Settings</span>
-        to configure:
-    </p>
-    <ol>
-        <li><strong>Window section:</strong> Set your custom window/tab title</li>
-        <li><strong>PWA section:</strong> Configure app name, icon, and colors</li>
-    </ol>
-
-    <div class="highlight">
-        <strong>Note:</strong> After changing PWA settings, users may need to clear their
-        browser cache (Ctrl+Shift+R) for the changes to take effect immediately.
-    </div>
-
-    <h2>Technical Information</h2>
-    <ul>
-        <li><strong>Version:</strong> 17.0.1.0.0</li>
-        <li><strong>License:</strong> LGPL-3</li>
-        <li><strong>Dependencies:</strong> base, web, base_setup</li>
-    </ul>
-
-    <div class="screenshots-section">
-        <h2>Screenshots</h2>
-        <div class="screenshots-grid">
-            <div class="screenshot-item">
-                <img src="settings.png" alt="Settings">
-                <div class="caption">Configuration</div>
-            </div>
-            <div class="screenshot-item">
-                <img src="hide_odoo_settings.png" alt="Window Settings">
-                <div class="caption">Hide Odoo from settings</div>
-            </div>
-            <div class="screenshot-item">
-                <img src="login.png" alt="User Menu">
-                <div class="caption">Login</div>
-            </div>
-            <div class="screenshot-item">
-                <img src="user_menu.png" alt="User Menu">
-                <div class="caption">Clean User Menu</div>
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span6">
+            <h3 class="oe_slogan">User Menu Customization</h3>
+            <p>Clean up the user dropdown menu by hiding unnecessary Odoo-related links:</p>
+            <ul>
+                <li>Hides "My Odoo.com account" option</li>
+                <li>Hides "Documentation" link</li>
+                <li>Hides "Support" link</li>
+            </ul>
+        </div>
+        <div class="oe_span6">
+            <div class="oe_demo oe_picture oe_screenshot">
+                <img src="user_menu.png" alt="User Menu"/>
             </div>
         </div>
     </div>
+</section>
 
-    <div class="support-section">
-        <h2>Need Help?</h2>
-        <p>
-            Have questions, found a bug, or need customization?<br>
-            I'm here to help you get the most out of this module.
-        </p>
-        <a href="mailto:eduardo.moron.arce@gmail.com?subject=Web Custom Branding - Support Request" class="btn-support">
-            Contact Support
-        </a>
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span6">
+            <div class="oe_demo oe_picture oe_screenshot">
+                <img src="login.png" alt="Login Page"/>
+            </div>
+        </div>
+        <div class="oe_span6">
+            <h3 class="oe_slogan">Login Page</h3>
+            <ul>
+                <li>Removes "Powered by Odoo" footer text</li>
+                <li>Clean, professional login experience</li>
+            </ul>
+        </div>
     </div>
-</body>
-</html>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span6">
+            <h3 class="oe_slogan">Window Title</h3>
+            <p>Customize the browser tab/window title:</p>
+            <ul>
+                <li>Set a custom window title (replaces "Odoo")</li>
+                <li>Configure in <b>Settings > General > Window</b></li>
+            </ul>
+        </div>
+        <div class="oe_span6">
+            <div class="oe_demo oe_picture oe_screenshot">
+                <img src="settings.png" alt="Settings"/>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12">
+            <h3 class="oe_slogan">PWA (Progressive Web App)</h3>
+            <span class="badge" style="background:#28a745; color:white; padding:4px 12px; border-radius:4px;">NEW</span>
+            <p class="oe_mt16">Full control over the installable web app experience:</p>
+        </div>
+        <div class="oe_span6">
+            <ul>
+                <li><b>App Name:</b> Custom name displayed when installing the app</li>
+                <li><b>PWA Icon:</b> Replace the Odoo icon with your own logo (512x512 PNG)</li>
+                <li><b>Theme Color:</b> Customize the browser toolbar color</li>
+                <li><b>Background Color:</b> Set the splash screen background color</li>
+            </ul>
+            <p>Configure in <b>Settings > General > PWA</b></p>
+        </div>
+        <div class="oe_span6">
+            <div class="oe_demo oe_picture oe_screenshot">
+                <img src="main_screen.png" alt="PWA Settings"/>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span6">
+            <h3 class="oe_slogan">Settings Panel</h3>
+            <ul>
+                <li>Hides the "About" section from General Settings</li>
+                <li>Removes Odoo version and company information</li>
+            </ul>
+        </div>
+        <div class="oe_span6">
+            <div class="oe_demo oe_picture oe_screenshot">
+                <img src="hide_odoo_settings.png" alt="Hide Odoo Settings"/>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12">
+            <h3 class="oe_slogan">Additional Features</h3>
+        </div>
+        <div class="oe_span6">
+            <h4>Offline Page</h4>
+            <ul>
+                <li>Hides Odoo icon on offline page</li>
+            </ul>
+        </div>
+        <div class="oe_span6">
+            <h4>Technical Information</h4>
+            <ul>
+                <li><b>Version:</b> 17.0.1.0.0</li>
+                <li><b>License:</b> LGPL-3</li>
+                <li><b>Dependencies:</b> base, web, base_setup</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12 text-center">
+            <h3 class="oe_slogan">Need Help?</h3>
+            <p class="oe_mt16">
+                Have questions, found a bug, or need customization?<br/>
+                I'm here to help you get the most out of this module.
+            </p>
+            <p class="oe_mt32">
+                <a class="btn btn-primary btn-lg" href="mailto:eduardo.moron.arce@gmail.com?subject=Web Custom Branding - Support Request">
+                    Contact Support
+                </a>
+            </p>
+        </div>
+    </div>
+</section>
