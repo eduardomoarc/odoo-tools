@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+import base64
+import io
+
+from PIL import Image
+
 from odoo import fields, models, api
 
 
@@ -37,6 +42,45 @@ class ResConfigSettings(models.TransientModel):
         default="#FFFFFF",
     )
 
+    def _resize_image(self, image_data, size):
+        """Resize image to specified size (square)."""
+        img = Image.open(io.BytesIO(base64.b64decode(image_data)))
+        img = img.convert('RGBA')
+        img = img.resize((size, size), Image.LANCZOS)
+        output = io.BytesIO()
+        img.save(output, format='PNG')
+        return base64.b64encode(output.getvalue())
+
+    def _create_pwa_icon_attachment(self, image_data, size, name=None):
+        """Create or update PWA icon attachment for a specific size."""
+        Attachment = self.env['ir.attachment'].sudo()
+        attachment_name = name or f'pwa-icon-{size}x{size}.png'
+
+        # Search for existing attachment
+        attachment = Attachment.search([
+            ('name', '=', attachment_name),
+            ('res_model', '=', 'ir.ui.view'),
+            ('res_id', '=', 0),
+        ], limit=1)
+
+        # Resize image to the target size
+        resized_data = self._resize_image(image_data, size)
+
+        if attachment:
+            attachment.write({'datas': resized_data})
+        else:
+            attachment = Attachment.create({
+                'name': attachment_name,
+                'type': 'binary',
+                'datas': resized_data,
+                'mimetype': 'image/png',
+                'public': True,
+                'res_model': 'ir.ui.view',
+                'res_id': 0,
+            })
+
+        return attachment.id
+
     @api.model
     def get_web_title(self):
         ir_config = self.env["ir.config_parameter"].sudo()
@@ -47,21 +91,37 @@ class ResConfigSettings(models.TransientModel):
     def get_values(self):
         res = super().get_values()
         ICP = self.env['ir.config_parameter'].sudo()
-        pwa_icon = ICP.get_param('web.pwa_icon', False)
-        if pwa_icon:
-            res['pwa_icon'] = pwa_icon
+        # Load the 512x512 icon for display in settings
+        attachment_id = ICP.get_param('web.pwa_icon_512', False)
+        if attachment_id:
+            attachment = self.env['ir.attachment'].sudo().browse(int(attachment_id))
+            if attachment.exists():
+                res['pwa_icon'] = attachment.datas
         return res
 
     def set_values(self):
         super().set_values()
         ICP = self.env['ir.config_parameter'].sudo()
         if self.pwa_icon:
-            # Store the icon as base64 in ir.config_parameter
+            # Get the image data
             if isinstance(self.pwa_icon, bytes):
-                icon_data = self.pwa_icon.decode('utf-8')
+                image_data = self.pwa_icon.decode('utf-8')
             else:
-                icon_data = self.pwa_icon
-            ICP.set_param('web.pwa_icon', icon_data)
+                image_data = self.pwa_icon
+
+            # Create attachments for both sizes
+            attachment_192_id = self._create_pwa_icon_attachment(image_data, 192)
+            attachment_512_id = self._create_pwa_icon_attachment(image_data, 512)
+
+            # Save attachment IDs in config parameters
+            ICP.set_param('web.pwa_icon_192', attachment_192_id)
+            ICP.set_param('web.pwa_icon_512', attachment_512_id)
         else:
-            # If icon is cleared, remove the parameter
-            ICP.set_param('web.pwa_icon', False)
+            # If icon is cleared, remove the attachments and parameters
+            for size in ['192', '512']:
+                attachment_id = ICP.get_param(f'web.pwa_icon_{size}', False)
+                if attachment_id:
+                    attachment = self.env['ir.attachment'].sudo().browse(int(attachment_id))
+                    if attachment.exists():
+                        attachment.unlink()
+                ICP.set_param(f'web.pwa_icon_{size}', False)

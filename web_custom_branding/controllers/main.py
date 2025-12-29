@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 import base64
 import json
-import mimetypes
 
 from odoo import http
-from odoo.exceptions import AccessError
 from odoo.http import request
 from odoo.tools import ustr, file_open
 from odoo.addons.web.controllers.webmanifest import WebManifest
@@ -12,21 +10,20 @@ from odoo.addons.web.controllers.webmanifest import WebManifest
 
 class WebManifestCustom(WebManifest):
 
-    def _get_pwa_icon_data(self, size):
+    def _get_pwa_icon_url(self, size):
         """
-        Get PWA icon data from config or return default custom icon path.
-        Returns tuple (is_base64, data) where:
-        - is_base64=True means data is base64 encoded image
-        - is_base64=False means data is a file path
+        Get PWA icon URL from attachment or return default static path.
         """
         ICP = request.env['ir.config_parameter'].sudo()
-        icon_param = ICP.get_param('web.pwa_icon', False)
+        # size is like "192" or "512"
+        attachment_id = ICP.get_param(f'web.pwa_icon_{size}', False)
 
-        if icon_param:
-            return (True, icon_param)
+        if attachment_id:
+            # Return the attachment URL
+            return f'/web/image/{attachment_id}'
 
-        # Default to custom branding icons if they exist
-        return (False, f'web_custom_branding/static/img/pwa-icon-{size}.png')
+        # Default to custom branding icons from static folder
+        return f'/web_custom_branding/static/img/pwa-icon-{size}x{size}.png'
 
     @http.route('/web/manifest.webmanifest', type='http', auth='public', methods=['GET'])
     def webmanifest(self):
@@ -52,25 +49,17 @@ class WebManifestCustom(WebManifest):
             'prefer_related_applications': False,
         }
 
-        # Check if custom icon is configured
-        pwa_icon = ICP.get_param('web.pwa_icon', False)
+        # Build icons list using attachment URLs or static files
+        icon_configs = [
+            {'size': '192', 'dimensions': '192x192'},
+            {'size': '512', 'dimensions': '512x512'},
+        ]
 
-        if pwa_icon:
-            # Use base64 icon served through a controller
-            icon_sizes = ['192x192', '512x512']
-            manifest['icons'] = [{
-                'src': f'/web/pwa-icon/{size}',
-                'sizes': size,
-                'type': 'image/png',
-            } for size in icon_sizes]
-        else:
-            # Use default custom branding icons from static folder
-            icon_sizes = ['192x192', '512x512']
-            manifest['icons'] = [{
-                'src': f'/web_custom_branding/static/img/pwa-icon-{size}.png',
-                'sizes': size,
-                'type': 'image/png',
-            } for size in icon_sizes]
+        manifest['icons'] = [{
+            'src': self._get_pwa_icon_url(cfg['size']),
+            'sizes': cfg['dimensions'],
+            'type': 'image/png',
+        } for cfg in icon_configs]
 
         manifest['shortcuts'] = self._get_shortcuts()
         body = json.dumps(manifest, default=ustr)
@@ -79,70 +68,34 @@ class WebManifestCustom(WebManifest):
         ])
         return response
 
-    @http.route('/web/pwa-icon/<string:size>', type='http', auth='public', methods=['GET'])
-    def pwa_icon(self, size):
-        """
-        Serve the PWA icon from the configured base64 image.
-        """
-        ICP = request.env['ir.config_parameter'].sudo()
-        pwa_icon = ICP.get_param('web.pwa_icon', False)
-
-        if pwa_icon:
-            try:
-                image_data = base64.b64decode(pwa_icon)
-                response = request.make_response(image_data, [
-                    ('Content-Type', 'image/png'),
-                    ('Cache-Control', 'public, max-age=604800'),
-                ])
-                return response
-            except Exception:
-                pass
-
-        # Fallback to default icon
-        try:
-            with file_open(f'web_custom_branding/static/img/pwa-icon-{size}.png', 'rb') as f:
-                image_data = f.read()
-                response = request.make_response(image_data, [
-                    ('Content-Type', 'image/png'),
-                    ('Cache-Control', 'public, max-age=604800'),
-                ])
-                return response
-        except Exception:
-            # Final fallback to Odoo default
-            with file_open(f'web/static/img/odoo-icon-{size}.png', 'rb') as f:
-                image_data = f.read()
-                response = request.make_response(image_data, [
-                    ('Content-Type', 'image/png'),
-                ])
-                return response
-
     def _icon_path(self):
         """Override to use custom icon for offline page"""
-        ICP = request.env['ir.config_parameter'].sudo()
-        pwa_icon = ICP.get_param('web.pwa_icon', False)
-
-        if pwa_icon:
-            # Will be handled by the offline controller
-            return 'web_custom_branding/static/img/pwa-icon-192x192.png'
-
         return 'web_custom_branding/static/img/pwa-icon-192x192.png'
 
     @http.route('/web/offline', type='http', auth='public', methods=['GET'])
     def offline(self):
         """Returns the offline page with custom icon"""
         ICP = request.env['ir.config_parameter'].sudo()
-        pwa_icon = ICP.get_param('web.pwa_icon', False)
+        attachment_id = ICP.get_param('web.pwa_icon_192', False)
 
-        if pwa_icon:
-            odoo_icon = pwa_icon
+        if attachment_id:
+            attachment = request.env['ir.attachment'].sudo().browse(int(attachment_id))
+            if attachment.exists():
+                odoo_icon = attachment.datas.decode('utf-8') if isinstance(attachment.datas, bytes) else attachment.datas
+            else:
+                odoo_icon = self._get_default_icon_base64()
         else:
-            try:
-                with file_open('web_custom_branding/static/img/pwa-icon-192x192.png', 'rb') as f:
-                    odoo_icon = base64.b64encode(f.read()).decode('utf-8')
-            except Exception:
-                with file_open('web/static/img/odoo-icon-192x192.png', 'rb') as f:
-                    odoo_icon = base64.b64encode(f.read()).decode('utf-8')
+            odoo_icon = self._get_default_icon_base64()
 
         return request.render('web.webclient_offline', {
             'odoo_icon': odoo_icon
         })
+
+    def _get_default_icon_base64(self):
+        """Get default icon as base64."""
+        try:
+            with file_open('web_custom_branding/static/img/pwa-icon-192x192.png', 'rb') as f:
+                return base64.b64encode(f.read()).decode('utf-8')
+        except Exception:
+            with file_open('web/static/img/odoo-icon-192x192.png', 'rb') as f:
+                return base64.b64encode(f.read()).decode('utf-8')
